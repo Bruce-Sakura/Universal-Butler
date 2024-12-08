@@ -11,7 +11,6 @@ def convert_datetime(obj):
 
 def connect_database():
     try:
-        # 创建数据库连接
         db = mysql.connector.connect(
             host="192.168.1.2",
             user="root",
@@ -21,10 +20,10 @@ def connect_database():
         cursor = db.cursor(dictionary=True)
         print("Connected to MyHome...")
         return db, cursor
-
     except mysql.connector.Error as err:
         print("Connection to database Error: " + str(err))
         return None, None
+
 
 def select_table_library(db, cursor):
     if db is None or cursor is None:
