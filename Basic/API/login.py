@@ -31,7 +31,7 @@ async def Login(user: UserRequest, db_cursor: tuple = Depends(connect_database))
             stored_password = result['Password']  # 使用字典方式访问字段
             if stored_password == password:  # 密码匹配
                 logging.info(f"User {username} logged in successfully")
-                return {"message": "Login successful", "redirect": "/index.html"}
+                return {"message": "Login successful", "status": "success"}  # 返回成功
             else:  # 密码不匹配
                 logging.warning(f"Invalid login attempt for user {username}: Incorrect password")
                 raise HTTPException(status_code=401, detail="Invalid credentials")

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b); /* 背景渐变 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+        label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .signup-link {
+            margin-top: 15px;
+        }
+        .signup-link a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-size: 14px;
+        }
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h2>Login</h2>
+    <form id="login-form" method="POST">
+        <div>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        </div>
+        <div>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+
+    <div class="signup-link">
+        <p>Don't have an account? <a href="/signup">Sign up here</a></p>
+    </div>
+
+    <div class="error-message" id="error-message">
+        <!-- 错误信息 -->
+    </div>
+</div>
+
+<script>
+    const backendUrl = `http://${window.location.hostname}:8000`;  // 如果前后端在同一个网络中
+
+    document.getElementById('login-form').addEventListener('submit', async function (event) {
+        event.preventDefault();  // 防止默认表单提交行为
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch(`${backendUrl}/Login`, {  // 确保URL和后端一致
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            // 检查请求是否成功
+            const data = await response.json();
+
+            if (data.status === "success") {
+                // 登录成功，存储用户名到 Cookie
+                document.cookie = `username=${encodeURIComponent(username)}; path=/;`;  // 存储用户名到 Cookie
+                // 登录成功，重定向到 main.html
+                window.location.href = 'main.html';  // 前端跳转
+            } else {
+                // 登录失败，显示错误信息
+                document.getElementById('error-message').textContent = data.message || 'Invalid username or password';
+            }
+        } catch (error) {
+            // 处理其他错误
+            console.error('Error:', error);
+            document.getElementById('error-message').textContent = 'An error occurred. Please try again later.';
+        }
+    });
+
+</script>
+</body>
+</html>
