@@ -8,14 +8,14 @@ app = FastAPI()
 @app.get("/")
 def root():
     return """
-            Hello, World!
-            This is an API.
-            Nice to meet you!
-            
-            API Endpoints Structure:
-            ├── /
-            │   ├── /database
-            │       ├── /database/Library
+            Hello, World!\n
+            This is an API.\n
+            Nice to meet you!\n
+            \n
+            API Endpoints Structure:\n
+            ├── /\n
+            │   ├── /database\n
+            │       ├── /database/Library\n
             """
 
 @app.get("/database")
