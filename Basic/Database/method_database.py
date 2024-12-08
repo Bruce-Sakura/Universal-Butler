@@ -9,7 +9,7 @@ def convert_datetime(obj):
         return obj.strftime('%Y-%m-%d %H:%M:%S')
     raise TypeError("Type not serializable")
 
-
+# 获取书籍数据
 def select_table_library(db, cursor):
     if db is None or cursor is None:
         print("Database connection is not established. Cannot query the table.")
@@ -26,6 +26,7 @@ def select_table_library(db, cursor):
     except mysql.connector.Error as err:
         print("Error querying Library table: " + str(err))
 
+# 获取物品数据
 def select_table_Items(db, cursor):
     if db is None or cursor is None:
         print("Database connection is not established. Cannot query the table.")
@@ -42,6 +43,7 @@ def select_table_Items(db, cursor):
     except mysql.connector.Error as err:
         print("Error querying Library table: " + str(err))
 
+# 获取用户名密码
 
 
 """
