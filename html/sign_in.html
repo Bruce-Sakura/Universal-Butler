@@ -14,7 +14,7 @@
             height: 100vh;
             margin: 0;
         }
-        .login-container {
+        .signin-container {
             background-color: white;
             padding: 30px;
             border-radius: 8px;
@@ -73,9 +73,9 @@
 </head>
 <body>
 
-<div class="login-container">
-    <h2>Login</h2>
-    <form id="login-form" method="POST">
+<div class="signin-container">
+    <h2>Sign in</h2>
+    <form id="signin-form" method="POST">
         <div>
             <input type="text" id="username" name="username" placeholder="Enter your username" required>
         </div>
@@ -97,7 +97,7 @@
 <script>
     const backendUrl = `http://${window.location.hostname}:8000`;  // 如果前后端在同一个网络中
 
-    document.getElementById('login-form').addEventListener('submit', async function (event) {
+    document.getElementById('signin-form').addEventListener('submit', async function (event) {
         event.preventDefault();  // 防止默认表单提交行为
 
         const username = document.getElementById('username').value;
