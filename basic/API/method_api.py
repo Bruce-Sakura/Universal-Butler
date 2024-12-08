@@ -3,6 +3,7 @@ from gradio.routes import templates
 from starlette.templating import Jinja2Templates
 from basic.Database.connect import connect_database
 from basic.Database.method_database import select_table_library
+from basic.Database.method_database import select_table_Items
 from starlette.responses import JSONResponse
 from fastapi.responses import HTMLResponse
 from fastapi.requests import Request
@@ -24,6 +25,16 @@ def database(request: Request):
 def library(db_cursor: tuple = Depends(connect_database)):
     db, cursor = db_cursor
     result = select_table_library(db, cursor)
+
+    if result:
+        return JSONResponse(content=json.loads(result))
+    else:
+        return {"error": "Failed to fetch data from database."}
+
+@app.get("/database/Items")
+def Items(db_cursor: tuple = Depends(connect_database)):
+    db, cursor = db_cursor
+    result = select_table_Items(db, cursor)
 
     if result:
         return JSONResponse(content=json.loads(result))
