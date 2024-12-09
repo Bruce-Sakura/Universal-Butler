@@ -1,5 +1,10 @@
 # Universal-Butler
 
+## 安装使用的库
+```
+pip install -r requirements.txt
+```
+
 ## 结构
 - api
   - 提供与前端交互的端口
