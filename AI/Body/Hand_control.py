@@ -26,7 +26,7 @@ double_click_threshold = 0.3  # 双击间隔阈值（秒）
 
 # Mediapipe Holistic 模型
 with mp_holistic.Holistic(min_detection_confidence=0.5, min_tracking_confidence=0.5) as holistic:
-    cap = cv2.VideoCapture(0)  # 打开摄像头
+    cap = cv2.VideoCapture(2)  # 打开摄像头
     while cap.isOpened():
         ret, frame = cap.read()
         if not ret:
